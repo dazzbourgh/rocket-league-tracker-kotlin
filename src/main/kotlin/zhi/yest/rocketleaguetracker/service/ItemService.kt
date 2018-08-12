@@ -1,16 +1,17 @@
 package zhi.yest.rocketleaguetracker.service
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import zhi.yest.rocketleaguetracker.domain.Item
 import zhi.yest.rocketleaguetracker.misc.Fetcher
 import javax.annotation.PostConstruct
-import javax.annotation.Resource
 
 const val URL = "https://rocket-league.com/trading"
 val ITEM_PATTERN = Regex("""<option value="([0-9]+)">(.*?)</option>""").toPattern()
 
 @Service
-class ItemService(@Resource(name = "retryingFetcher") private val fetcher: Fetcher) {
+class ItemService(@Autowired @Qualifier("retryingFetcher") private val fetcher: Fetcher) {
     private val items: MutableList<Item> = mutableListOf()
 
     @PostConstruct
