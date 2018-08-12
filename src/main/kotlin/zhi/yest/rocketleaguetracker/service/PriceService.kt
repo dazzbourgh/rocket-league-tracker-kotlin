@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service
 import zhi.yest.rocketleaguetracker.misc.DomFetcher
 import javax.annotation.PostConstruct
 
-
 const val PRICE_URL = "https://rltracker.pro/prices"
 
 @Service
