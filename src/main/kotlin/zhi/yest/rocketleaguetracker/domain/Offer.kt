@@ -1,4 +1,3 @@
 package zhi.yest.rocketleaguetracker.domain
 
-class Offer {
-}
+data class Offer(val has: OfferItem, val want: OfferItem)

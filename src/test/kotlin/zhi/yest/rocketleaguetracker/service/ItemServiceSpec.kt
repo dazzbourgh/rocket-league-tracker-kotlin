@@ -22,7 +22,7 @@ class ItemServiceSpec : Spek({
                 more !@$ random crap
             """.trimIndent()
         }
-        val itemService = ItemService(fetcher)
+        val itemService = ItemService(fetcher, "http://random/url")
         on("initializing items list and getting similar items") {
             itemService.init()
             val expectedResult = listOf(Item(844, "Chafed Cherry"),

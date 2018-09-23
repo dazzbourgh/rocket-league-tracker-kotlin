@@ -16,7 +16,7 @@ class PriceServiceSpec : Spek({
         val mockDomFetcher = mock<DomFetcher> {
             on { fetchPage(any()) } doReturn Jsoup.parse(MOCK_PAGE)
         }
-        val priceService = PriceService(mockDomFetcher)
+        val priceService = PriceService(mockDomFetcher, "random/url")
         on("initializing and getting Zephyr Crate price") {
             priceService.init()
             val price = priceService.getPrice("Zephyr Crate")
