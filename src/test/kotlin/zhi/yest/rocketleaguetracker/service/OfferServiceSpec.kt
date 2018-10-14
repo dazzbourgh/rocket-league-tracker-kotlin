@@ -16,7 +16,7 @@ import zhi.yest.rocketleaguetracker.domain.Offer
 import zhi.yest.rocketleaguetracker.misc.Fetcher
 import java.io.File
 
-class OfferServiceSpec : Spek({
+object OfferServiceSpec : Spek({
     given("an offer service") {
         val url = "https://trade/url"
         val page = File("./target/test-classes/offer-service-input.html").readText()
@@ -30,13 +30,14 @@ class OfferServiceSpec : Spek({
         on("getting offers") {
             val offers: List<Offer> = sut.getOffers(Filter(1, 0, 0, 0), 1)
             it("should return offer list") {
+                assertEquals(true, false)
                 assertThat(offers, not(empty()))
-                assertEquals(offers[0].has.name, "Bubbly (Black Market)")
-                assertEquals(offers[1].has.name, "Apex")
-                assertEquals(offers[2].has.name, "Sovereign A/T")
-                assertEquals(offers[0].wants.name, "Key")
-                assertEquals(offers[1].wants.name, "Key")
-                assertEquals(offers[2].wants.name, "Key")
+                assertEquals("Bubbly (Black Market)", offers[0].has.name)
+                assertEquals("Apex", offers[1].has.name)
+                assertEquals("Sovereign A/T", offers[2].has.name)
+                assertEquals("Key", offers[0].wants.name)
+                assertEquals("Key", offers[1].wants.name)
+                assertEquals("Key", offers[2].wants.name)
             }
         }
     }

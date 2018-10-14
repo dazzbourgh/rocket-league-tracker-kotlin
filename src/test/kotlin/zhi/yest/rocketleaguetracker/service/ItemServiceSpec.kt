@@ -11,7 +11,7 @@ import org.junit.Assert.assertEquals
 import zhi.yest.rocketleaguetracker.domain.Item
 import zhi.yest.rocketleaguetracker.misc.Fetcher
 
-class ItemServiceSpec : Spek({
+object ItemServiceSpec : Spek({
     given("An item service") {
         val fetcher: Fetcher = mock {
             on { fetchPage(any()) } doReturn """
