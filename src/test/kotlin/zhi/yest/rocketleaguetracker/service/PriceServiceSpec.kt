@@ -11,12 +11,12 @@ import org.jsoup.Jsoup
 import org.junit.Assert.assertEquals
 import zhi.yest.rocketleaguetracker.misc.DomFetcher
 
-class PriceServiceSpec : Spek({
+object PriceServiceSpec : Spek({
     given("a price service") {
         val mockDomFetcher = mock<DomFetcher> {
             on { fetchPage(any()) } doReturn Jsoup.parse(MOCK_PAGE)
         }
-        val priceService = PriceService(mockDomFetcher)
+        val priceService = PriceService(mockDomFetcher, "random/url")
         on("initializing and getting Zephyr Crate price") {
             priceService.init()
             val price = priceService.getPrice("Zephyr Crate")
