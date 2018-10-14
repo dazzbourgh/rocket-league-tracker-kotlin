@@ -15,14 +15,16 @@ class PriceService(@Autowired private val fetcher: DomFetcher,
     fun init() {
         val doc = fetcher.fetchPage(pricePageUrl)
         val elements = doc.select(".col-price")
-        elements.forEach { element ->
-            val name = element.select("h4>a").text()
-            val price = element.select(".footer")
-                    .text()
-                    .trim()
-                    .toFloat()
-            priceMap[name] = price
-        }
+        elements
+                .map {
+                    val name = it.select("h4>a").text()
+                    val price = it.select(".footer")
+                            .text()
+                            .trim()
+                    Pair(name, price)
+                }
+                .filter { !it.second.contains("-") }
+                .forEach { priceMap[it.first] = it.second.toFloat() }
     }
 
     fun getPrice(name: String): Float {
