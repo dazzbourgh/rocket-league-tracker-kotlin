@@ -12,7 +12,7 @@ import zhi.yest.rocketleaguetracker.service.ItemService
 @RequestMapping("/item")
 class ItemController(@Autowired private val itemService: ItemService) {
     @GetMapping
-    fun getItems(@RequestParam itemName: String): List<Item> {
-        return itemService.getItems(itemName)
+    fun getItems(@RequestParam name: String): List<Item> {
+        return itemService.getItems(name)
     }
 }

@@ -1,0 +1,12 @@
+price:
+  page:
+    url: https://rltracker.pro/prices
+trade:
+  page:
+    url: https://rocket-league.com/trading
+item:
+  page:
+    url: https://rocket-league.com/trading
+
+server:
+  port: 3000
