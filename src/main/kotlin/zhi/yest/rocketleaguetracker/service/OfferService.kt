@@ -31,7 +31,20 @@ class OfferService
         val document = fetcher.fetchPage("$tradePageUrl?$filter")
                 .substringAfter("</head>")
                 .substringBefore("</html>")
-                .let { documentBuilder.parse(it.byteInputStream()) }
+                .let {
+                    val normalizedPage = "(<main class=\"rlg-main\">.*?</main>)"
+                            .toRegex(RegexOption.DOT_MATCHES_ALL)
+                            .find(it)!!
+                            .groups[1]!!
+                            .value
+                            .let { main ->
+                                val selected = "selected(?=.*?</option>)".toRegex()
+                                val nbsp = "&nbsp;".toRegex()
+                                main.replace(selected, "")
+                                        .replace(nbsp, " ")
+                            }
+                    documentBuilder.parse(normalizedPage.byteInputStream())
+                }
         val hasItems = document.toNodeList(HAS_XPATH)
                 .map { it toOfferItemWith priceService }
         val wantsItems = document.toNodeList(WANTS_XPATH)

@@ -25,9 +25,12 @@ class PriceService(@Autowired private val fetcher: DomFetcher,
                 }
                 .filter { !it.second.contains("-") }
                 .forEach { priceMap[it.first] = it.second.toFloat() }
+        priceMap["Key"] = 1f
     }
 
     fun getPrice(name: String): Float {
-        return priceMap[name]!!
+        return priceMap[name.replace(" (Black Market)", "")] ?: 0.0f.also {
+            println("null for $name")
+        }
     }
 }
